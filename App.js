@@ -10,7 +10,6 @@ function App() {
       <NavigationContainer>
         <StackNavigator />
       </NavigationContainer>
-      
     </NativeBaseProvider>
   )
 }

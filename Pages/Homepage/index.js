@@ -1,16 +1,19 @@
-import React, { useEffect, useState } from 'react';
-import { View, Text, FlatList, StyleSheet, RefreshControl, TouchableOpacity } from 'react-native';
+import React, { useEffect, useRef, useState } from 'react';
+import { View, Text, FlatList, StyleSheet, RefreshControl, TouchableOpacity, DrawerLayoutAndroid, Linking } from 'react-native';
 import axios from 'axios';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Card, Avatar } from 'react-native-elements';
 import { Badge, Button, Drawer } from 'native-base';
-import { TouchableRipple } from 'react-native-paper';
+import { Modal, Searchbar, TouchableRipple } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 
 const Login = () => {
     const [img, setImg] = useState([]);
     const [refreshing, setRefreshing] = useState(false);
+    const [searchQuery, setSearchQuery] = useState('');
+    const [filteredImg, setFilteredImg] = useState([]);
 
     const fetch = async () => {
         try {
@@ -38,6 +41,12 @@ const Login = () => {
     useEffect(() => {
         fetch();
     }, []);
+    // useEffect(() => {
+    //     const filteredImages = img.filter(data =>
+    //         results.name.first.toLowerCase().includes(searchQuery.toLowerCase())
+    //     );
+    //     setFilteredImg(filteredImages);
+    // }, [searchQuery, img]);
 
     const keyExtractor = (item, index) => index.toString();
 
@@ -57,17 +66,54 @@ const Login = () => {
                 </View>
                 <Badge style={styles.badge}>{item.dob.age}</Badge>
             </View>
-            {/* <Card.Actions>
-                <Button>Edit</Button>
-                <Button>Share</Button>
-            </Card.Actions> */}
         </Card>
     );
+    // const drawer = useRef(false);
+    // const navigationView = () => (
+    //     <View>
+    //         <TouchableOpacity
+    //             onPress={() => openLink('https://www.instagram.com')}>
+    //             <FontAwesome
+    //                 name="instagram"
+    //                 size={30}
+    //                 color="#000"
+    //                 style={styles.icon} />
+    //         </TouchableOpacity>
+    //         <TouchableOpacity
+    //             onPress={() => openLink('https://www.facebook.com')}>
+    //             <FontAwesome
+    //                 name="facebook"
+    //                 size={30}
+    //                 color="#000"
+    //                 style={styles.icon} />
+    //         </TouchableOpacity>
+    //         <TouchableOpacity
+    //             onPress={() => openLink('https://www.gmail.com')}>
+    //             <FontAwesome
+    //                 name="envelope"
+    //                 size={30}
+    //                 color="#000"
+    //                 style={styles.icon} />
+    //         </TouchableOpacity>
+    //     </View>
+    // );
+    // const openLink = (url) => {
+    //     Linking.openURL(url).catch(err => console.error('An error occurred', err));
+    // };
+    // useEffect(() => {
+    //     drawer.current.openDrawer();
+    // }, []);
 
     return (
         <SafeAreaView style={styles.container}>
             <View>
                 <Text style={styles.welcomeText}>Welcome Back</Text>
+            </View>
+            <View style={styles.searchbar}>
+                <Searchbar style={styles.searchtext}
+                    placeholder="Search"
+                    value={searchQuery}
+                />
             </View>
             <FlatList
                 data={img}
@@ -92,6 +138,21 @@ const Login = () => {
             >
                 <Text>Content Page</Text>
             </TouchableOpacity>
+            {/* <View style={{ height: '20%' }}>
+
+                <DrawerLayoutAndroid
+                    ref={drawer}
+                    drawerWidth={300}
+                    renderNavigationView={navigationView}>
+                    <View >
+                        <Button
+                            title="Press"
+                            onPress={() => drawer.current.openDrawer()}
+                        />
+                    </View>
+
+                </DrawerLayoutAndroid>
+            </View> */}
         </SafeAreaView >
     );
 };
@@ -140,6 +201,13 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         borderRadius: 10
     },
+    searchbar: {
+        paddingHorizontal: 20,
+        margin: 10,
+    },
+    searchtext: {
+        backgroundColor: '#dfe6e4',
+    }
 
 });
 

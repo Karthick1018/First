@@ -19,7 +19,6 @@ function CustomNavigator() {
             <Stack.Screen name='Login' component={Login} options={{ headerShown: false }} />
             <Stack.Screen name='Home' component={Home} options={{ headerShown: false }} />
             <Stack.Screen name='Content' component={Content} options={{ headerShown: false }} />
-
         </Stack.Navigator>
     )
 }

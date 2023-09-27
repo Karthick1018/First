@@ -7,7 +7,6 @@ function Splash() {
     const isFocused = useIsFocused();
     const spinValue = useRef(new Animated.Value(0)).current;
 
-
     const rotateImage = () => {
         spinValue.setValue(0);
         Animated.timing(spinValue, {
