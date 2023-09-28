@@ -16,17 +16,17 @@ import {
 function Home({ navigation }) {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const [selectedValue, setSelectedValue] = useState('option1');
+    // const [selectedValue, setSelectedValue] = useState('option1');
 
     const onPressButton = () => {
-        // if (username === '' || password === '') {
-        //     Alert.alert('Login ERROR', 'Try Again');
-        // } else if (username !== password) {
-        //     Alert.alert('Login ERROR', 'Try Again');
-        // } else {
-        //     navigation.replace('Home');
-        // };
-        navigation.replace('Home');
+        if (username === '' || password === '') {
+            Alert.alert('Login ERROR', 'Try Again');
+        } else if (username !== password) {
+            Alert.alert('Login ERROR', 'Try Again');
+        } else {
+            navigation.replace('Home');
+        };
+       // navigation.replace('Home');
     }
 
     return (
