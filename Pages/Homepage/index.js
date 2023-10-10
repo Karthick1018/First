@@ -8,7 +8,6 @@ import { Modal, Searchbar, TouchableRipple } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
-
 const Login = () => {
     const [img, setImg] = useState([]);
     const [refreshing, setRefreshing] = useState(false);
